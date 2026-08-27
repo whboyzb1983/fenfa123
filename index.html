@@ -21,12 +21,10 @@
             justify-content: center;
             padding: 20px;
             margin: 0;
-            /* 平滑字体 */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* 卡片容器 — 完美适配移动端 */
         .card {
             max-width: 720px;
             width: 100%;
@@ -36,10 +34,8 @@
             padding: 32px 28px;
             transition: all 0.2s ease;
             margin: 0 auto;
-            /* 移动端内边距微调 */
         }
 
-        /* 标题区域 */
         .hero {
             margin-bottom: 28px;
             display: flex;
@@ -76,7 +72,6 @@
             white-space: nowrap;
         }
 
-        /* 信息卡片 */
         .info-box {
             background: #f8faff;
             border-radius: 24px;
@@ -105,7 +100,6 @@
             margin-left: 8px;
         }
 
-        /* 价格亮点 */
         .price-tag {
             background: linear-gradient(135deg, #0b1a33 0%, #1a3a6b 100%);
             color: white;
@@ -144,7 +138,6 @@
             margin-left: 4px;
         }
 
-        /* 特性列表 — 移动友好 */
         .feature-list {
             list-style: none;
             padding: 0;
@@ -186,7 +179,7 @@
             color: #0b1a33;
         }
 
-        /* 联系方式 — 大按钮风格 */
+        /* 联系方式 — 按钮样式 + Telegram 链接 */
         .contact-block {
             background: #ffffff;
             border-radius: 60px;
@@ -219,6 +212,7 @@
             color: #1a4cff;
         }
 
+        /* 真正的 Telegram 链接按钮 */
         .contact-link {
             background: #0b1a33;
             color: white;
@@ -234,8 +228,9 @@
             transition: background 0.15s, transform 0.1s;
             box-shadow: 0 6px 14px -6px rgba(11, 26, 51, 0.3);
             border: none;
-            cursor: default; /* 无实际链接，仅展示 */
+            cursor: pointer;
             white-space: nowrap;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .contact-link:hover {
@@ -246,7 +241,7 @@
             transform: scale(0.96);
         }
 
-        /* 脚注小字 */
+        /* 脚注 */
         .footnote {
             margin-top: 28px;
             font-size: 0.8rem;
@@ -263,7 +258,7 @@
             font-weight: 500;
         }
 
-        /* 针对极窄屏额外优化 */
+        /* 极窄屏适配 */
         @media (max-width: 480px) {
             .card {
                 padding: 24px 16px;
@@ -317,7 +312,6 @@
             }
         }
 
-        /* 额外：大屏居中 + 舒适 */
         @media (min-width: 900px) {
             .card {
                 padding: 48px 40px;
@@ -325,11 +319,6 @@
             .hero h1 {
                 font-size: 2.8rem;
             }
-        }
-
-        /* 辅助：点击时无蓝框 */
-        .contact-link {
-            -webkit-tap-highlight-color: transparent;
         }
     </style>
 </head>
@@ -349,10 +338,10 @@
             <!-- 价格卡 -->
             <div class="price-tag">
                 <span class="plan">📦 包月 · 不限下载</span>
-                <span class="amount">1000 <small>元</small></span>
+                <span class="amount">1000 <small>元起</small></span>
             </div>
 
-            <!-- 特性列表 — 更清晰 -->
+            <!-- 特性列表 -->
             <ul class="feature-list">
                 <li>
                     <span class="icon">✅</span>
@@ -368,18 +357,23 @@
                 </li>
             </ul>
 
-            <!-- 联系方式 — 移动端大按钮 -->
+            <!-- 联系方式 — Telegram 可点击按钮 -->
             <div class="contact-block">
                 <span class="label">
                     📬 联系
                     <span>官方</span>
                 </span>
-                <span class="contact-link" role="button" aria-label="联系分发导航">
-                    ✉️ @fenfa123
-                </span>
+                <!-- Telegram 链接：使用 tg:// 协议唤起 App，同时保留 https 作为 fallback -->
+                <a href="https://t.me/fenfa123" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="contact-link" 
+                   aria-label="通过 Telegram 联系分发导航">
+                    ✈️ @fenfa123
+                </a>
             </div>
 
-            <!-- 附加提示 (移动端更显眼) -->
+            <!-- 附加提示 -->
             <div style="margin-top: 20px; font-size: 0.9rem; color: #3a4b6e; background: #f0f4fe; padding: 12px 18px; border-radius: 40px; text-align: center; border: 1px solid rgba(26,76,255,0.08);">
                 💬 企业合作 · 专属方案 · 7x24 支持
             </div>
