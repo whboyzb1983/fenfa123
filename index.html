@@ -2,31 +2,395 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>欢迎访问分发导航</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>分发导航 · 移动兼容</title>
     <style>
-        body {
-            font-family: -apple-system, sans-serif;
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background: #f5f5f5;
+        /* 全局重置 & 移动友好 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        h1 { color: #333; }
-        .info { 
-            background: white; 
-            padding: 20px; 
-            border-radius: 8px; 
-            margin: 20px 0;
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            margin: 0;
+            /* 平滑字体 */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* 卡片容器 — 完美适配移动端 */
+        .card {
+            max-width: 720px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15), 0 8px 24px -6px rgba(0, 0, 0, 0.05);
+            padding: 32px 28px;
+            transition: all 0.2s ease;
+            margin: 0 auto;
+            /* 移动端内边距微调 */
+        }
+
+        /* 标题区域 */
+        .hero {
+            margin-bottom: 28px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px 8px;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.8rem, 7vw, 2.8rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #0b1a33;
+            line-height: 1.2;
+            word-break: break-word;
+        }
+
+        .hero .emoji-big {
+            font-size: clamp(2rem, 8vw, 3rem);
+            line-height: 1;
+            display: inline-block;
+        }
+
+        .badge {
+            background: #eef3ff;
+            color: #1a4cff;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 6px 16px;
+            border-radius: 100px;
+            display: inline-block;
+            letter-spacing: 0.3px;
+            margin-top: 4px;
+            white-space: nowrap;
+        }
+
+        /* 信息卡片 */
+        .info-box {
+            background: #f8faff;
+            border-radius: 24px;
+            padding: 28px 24px;
+            margin: 24px 0 20px;
+            border: 1px solid rgba(26, 76, 255, 0.08);
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.02);
+        }
+
+        .info-box h2 {
+            font-size: clamp(1.3rem, 5vw, 1.8rem);
+            font-weight: 600;
+            color: #0b1a33;
+            margin-bottom: 20px;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-box h2::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(26,76,255,0.2) 0%, transparent 100%);
+            margin-left: 8px;
+        }
+
+        /* 价格亮点 */
+        .price-tag {
+            background: linear-gradient(135deg, #0b1a33 0%, #1a3a6b 100%);
+            color: white;
+            padding: 18px 22px;
+            border-radius: 20px;
+            margin-bottom: 24px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 8px 16px -8px rgba(11, 26, 51, 0.2);
+        }
+
+        .price-tag .plan {
+            font-size: 1.1rem;
+            font-weight: 500;
+            opacity: 0.9;
+            letter-spacing: 0.3px;
+        }
+
+        .price-tag .amount {
+            font-size: clamp(1.8rem, 6vw, 2.6rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: rgba(255,255,255,0.15);
+            padding: 4px 18px;
+            border-radius: 60px;
+            backdrop-filter: blur(2px);
+            white-space: nowrap;
+        }
+
+        .price-tag .amount small {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.8;
+            margin-left: 4px;
+        }
+
+        /* 特性列表 — 移动友好 */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            font-size: clamp(1rem, 4vw, 1.15rem);
+            line-height: 1.4;
+            color: #1f2a44;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list .icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            width: 2rem;
+            text-align: center;
+            margin-top: -2px;
+        }
+
+        .feature-list .text {
+            flex: 1;
+        }
+
+        .feature-list .highlight {
+            font-weight: 600;
+            color: #0b1a33;
+        }
+
+        /* 联系方式 — 大按钮风格 */
+        .contact-block {
+            background: #ffffff;
+            border-radius: 60px;
+            padding: 6px 6px 6px 24px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px 16px;
+            border: 1px solid #e9edf4;
+            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+
+        .contact-block .label {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #2c3a5e;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .contact-block .label span {
+            background: #eef3ff;
+            padding: 2px 10px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #1a4cff;
+        }
+
+        .contact-link {
+            background: #0b1a33;
+            color: white;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 0.3px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.15s, transform 0.1s;
+            box-shadow: 0 6px 14px -6px rgba(11, 26, 51, 0.3);
+            border: none;
+            cursor: default; /* 无实际链接，仅展示 */
+            white-space: nowrap;
+        }
+
+        .contact-link:hover {
+            background: #1a3a6b;
+        }
+
+        .contact-link:active {
+            transform: scale(0.96);
+        }
+
+        /* 脚注小字 */
+        .footnote {
+            margin-top: 28px;
+            font-size: 0.8rem;
+            color: #7b8aa8;
+            text-align: center;
+            border-top: 1px solid #edf2f9;
+            padding-top: 22px;
+            letter-spacing: 0.2px;
+        }
+
+        .footnote a {
+            color: #1a4cff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* 针对极窄屏额外优化 */
+        @media (max-width: 480px) {
+            .card {
+                padding: 24px 16px;
+                border-radius: 24px;
+            }
+
+            .info-box {
+                padding: 20px 16px;
+            }
+
+            .contact-block {
+                padding: 6px 6px 6px 16px;
+                flex-direction: column;
+                align-items: stretch;
+                border-radius: 32px;
+                background: #f8faff;
+                border-color: transparent;
+                box-shadow: none;
+            }
+
+            .contact-block .label {
+                justify-content: center;
+                padding: 4px 0;
+            }
+
+            .contact-link {
+                justify-content: center;
+                padding: 16px 20px;
+                width: 100%;
+                font-size: 1rem;
+            }
+
+            .price-tag {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+                padding: 16px 18px;
+            }
+
+            .price-tag .amount {
+                align-self: flex-start;
+                padding: 4px 14px;
+            }
+
+            .hero h1 {
+                font-size: clamp(1.6rem, 7vw, 2.2rem);
+            }
+
+            .feature-list li {
+                gap: 12px;
+            }
+        }
+
+        /* 额外：大屏居中 + 舒适 */
+        @media (min-width: 900px) {
+            .card {
+                padding: 48px 40px;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        /* 辅助：点击时无蓝框 */
+        .contact-link {
+            -webkit-tap-highlight-color: transparent;
         }
     </style>
 </head>
 <body>
-    <h1>🎉 欢迎访问 分发导航/APP加速分发</h1>
-    <div class="info">
-        <h2>收费标准</h2>
-        <p>✅ 包月 <strong>不限下载次数</strong> 1000元起</p>
-        <p>✅ 全球CDN加速不限流</p>
-        <p>✅ 联系：@fenfa123</p>
-    </div>
+    <main class="card" role="main">
+        <!-- 标题区 -->
+        <div class="hero">
+            <span class="emoji-big">🎉</span>
+            <h1>分发导航<br class="hide-on-desktop" style="display: none;" /> <span style="background: linear-gradient(145deg, #0b1a33, #1f3a6b); -webkit-background-clip: text; background-clip: text; color: transparent;">APP加速分发</span></h1>
+            <span class="badge">🚀 全球CDN</span>
+        </div>
+
+        <!-- 主要信息卡片 -->
+        <div class="info-box">
+            <h2>📋 收费标准</h2>
+
+            <!-- 价格卡 -->
+            <div class="price-tag">
+                <span class="plan">📦 包月 · 不限下载</span>
+                <span class="amount">1000 <small>元</small></span>
+            </div>
+
+            <!-- 特性列表 — 更清晰 -->
+            <ul class="feature-list">
+                <li>
+                    <span class="icon">✅</span>
+                    <span class="text"><span class="highlight">包月</span> 不限下载次数 · 1000元起</span>
+                </li>
+                <li>
+                    <span class="icon">🌍</span>
+                    <span class="text"><span class="highlight">全球CDN加速</span> 不限流 · 多节点覆盖</span>
+                </li>
+                <li>
+                    <span class="icon">⚡</span>
+                    <span class="text">适合应用分发、OTA、游戏热更新</span>
+                </li>
+            </ul>
+
+            <!-- 联系方式 — 移动端大按钮 -->
+            <div class="contact-block">
+                <span class="label">
+                    📬 联系
+                    <span>官方</span>
+                </span>
+                <span class="contact-link" role="button" aria-label="联系分发导航">
+                    ✉️ @fenfa123
+                </span>
+            </div>
+
+            <!-- 附加提示 (移动端更显眼) -->
+            <div style="margin-top: 20px; font-size: 0.9rem; color: #3a4b6e; background: #f0f4fe; padding: 12px 18px; border-radius: 40px; text-align: center; border: 1px solid rgba(26,76,255,0.08);">
+                💬 企业合作 · 专属方案 · 7x24 支持
+            </div>
+        </div>
+
+        <!-- 脚注 -->
+        <div class="footnote">
+            <span>📱 移动适配 · 全球加速 · 稳定分发</span>
+            <span style="display: inline-block; margin: 0 6px;">•</span>
+            <span>© 分发导航</span>
+        </div>
+    </main>
 </body>
 </html>
